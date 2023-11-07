@@ -21,30 +21,14 @@ let validAnagrams = (s, t) => s.split('').sort().join('') === t.split('').sort()
 
 function reverseBaseSort(arr) {
   let stringSorted = arr.map(el => el.toString()).sort(compNums)
-  console.log(stringSorted)
-  let pointer = 0
-
-  while (pointer < stringSorted.length) {
-    // Do not move this console.log
-
-    // Find the index of the minimum value in the unsorted half
-    let maxIndex = pointer
-    for (let i = pointer; i < stringSorted.length; i++) {
-      if (stringSorted[maxIndex].length < stringSorted[i].length) {
-        maxIndex = i
-      }
+  stringSorted.sort((a,b) => {
+    if (a.length > b.length) {
+      return -1
     }
-    //Save the min value
-    let maxValue = stringSorted[maxIndex]
-    // Shift every unsorted value to the left of the min value to the right by 1
-    for (let j = maxIndex; j > pointer; j--) {
-      stringSorted[j] = stringSorted[j-1]
+    else if (b.length > a.length) {
+      return 1
     }
-    // Put the min value at the divider
-    stringSorted[pointer] = maxValue
-    // Increment the divider and repeat
-    pointer ++
-  }
+  })
   return stringSorted.map(el => parseInt(el))
 }
 
@@ -69,7 +53,6 @@ function frequencySort(arr) {
       }
     }
   })
-
 }
 
 module.exports = [
